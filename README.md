@@ -44,7 +44,19 @@
 
 ### 需求
 
-- Node.js 18+、Yarn 1.x、Git 2.x、Python 3.x（編譯原生模組）
+| 工具 | 版本 | 下載 |
+|------|------|------|
+| Node.js | 18+ | [nodejs.org](https://nodejs.org/)（選 LTS 版） |
+| Yarn | 1.x | 安裝 Node.js 後執行 `npm install -g yarn` |
+| Git | 2.x | [git-scm.com](https://git-scm.com/) |
+| Python | 3.x | [python.org](https://www.python.org/)（編譯原生模組用） |
+
+> **完全沒有 Node.js？** 先至 [nodejs.org](https://nodejs.org/) 下載並安裝 LTS 版本，安裝完畢後開啟終端（Windows: Win+R → `cmd`）執行：
+> ```bash
+> node -v   # 應顯示 v18.x.x 或以上
+> npm install -g yarn
+> yarn -v   # 應顯示 1.x.x
+> ```
 
 ### 一鍵啟動（推薦）
 
