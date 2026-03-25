@@ -1,0 +1,12 @@
+{
+  "name": "apt-customization-tw-server-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Awakened PoE Trade — Taiwan Server Localization",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:renderer": "node scripts/dev.mjs --renderer-only",
+    "dev:main": "node scripts/dev.mjs --main-only"
+  }
+}
