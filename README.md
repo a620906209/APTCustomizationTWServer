@@ -1,74 +1,61 @@
-# Awakened PoE Trade — 台灣服務器版
+# Awakened PoE Trade — 台灣伺服器在地化版本
 
 [![License](https://img.shields.io/github/license/SnosMe/awakened-poe-trade)](./LICENSE)
+[![Based On](https://img.shields.io/badge/based%20on-awakened--poe--trade-blue)](https://github.com/SnosMe/awakened-poe-trade)
+[![Server](https://img.shields.io/badge/server-pathofexile.tw-green)](https://pathofexile.tw)
 
-基於 [SnosMe/awakened-poe-trade](https://github.com/SnosMe/awakened-poe-trade) 的分支修改版，**專為流亡黯道台灣服務器 (pathofexile.tw)** 在地化。
+> 基於 [SnosMe/awakened-poe-trade](https://github.com/SnosMe/awakened-poe-trade) 的分支，**專為流亡黯道台灣伺服器 (pathofexile.tw / Hotcool)** 深度在地化。
 
 ---
-
-## 台服適配重點
-
-- **繁體中文物品解析** — 解析器完整支援台服 Ctrl+C 複製的繁中物品文字（稀有度、物品等級、品質、插槽等）
-- **API 導向台服** — 所有交易請求導向 `pathofexile.tw`，使用台服專屬聯盟端點 `/api/trade/data/leagues`
-- **POESESSID 注入** — 設定頁面可輸入 POESESSID，自動注入至台服請求的 Cookie 中
-- **自訂 User-Agent** — 台服請求使用 `Awakened-PoE-Trade-Taiwan-Mod/1.0` 避免防火牆攔截
-- **預設聯盟** — 台服預設聯盟為「標準模式」
 
 ## 功能總覽
 
 | 功能 | 說明 |
 |------|------|
-| 即時價格查詢 | 遊戲內直接查詢物品市場價格 |
+| 即時詢價 | 遊戲內直接查詢物品市場價格，對應台服交易網站 |
 | 地圖詞綴檢查 | 快速辨識地圖危險詞綴 |
 | 倉庫搜尋 | 進階篩選條件搜尋倉庫物品 |
 | 圖像辨識 | OCR 寶石辨識（劫盜寶石搜尋器） |
-| 遊戲內覆蓋 | 透明 UI 浮於遊戲畫面之上 |
+| 遊戲內覆蓋 | 透明 UI 浮於遊戲畫面之上，不影響遊戲操作 |
 
-## 技術棧
+---
 
-| 類別 | 技術 | 版本 |
-|------|------|------|
-| 桌面框架 | Electron | 40.8.0 |
-| 前端框架 | Vue 3 | 3.2.37 |
-| CSS 框架 | Tailwind CSS | 3.x |
-| 構建工具 | Vite + esbuild | 5.x |
-| 語言 | TypeScript | 5.6+ |
-| 套件管理器 | Yarn | 1.x (Classic) |
+## 台服在地化重點
 
-## 開發環境設定
+- **繁體中文物品解析** — 解析器完整支援台服 `Ctrl+C` 複製的繁中物品文字
+- **API 全面導向台服** — 所有交易請求導向 `pathofexile.tw`，使用台服聯盟端點
+- **POESESSID 注入** — 設定頁面可輸入 POESESSID，自動注入至台服請求 Cookie
+- **自訂 User-Agent** — 台服請求使用 `Awakened-PoE-Trade-Taiwan-Mod/1.0`
+- **繁中 UI 全翻譯** — 介面、設定、詞綴標籤等 306 個翻譯鍵全數本地化
+- **台服聯盟自動偵測** — 啟動時自動載入台服聯盟列表，預設「標準模式」
+
+---
+
+## 使用方式
+
+1. 開啟設定（`Ctrl + Space` → 齒輪圖示）
+2. 語言選「**正體中文**」、伺服器選「**Hotcool**」
+3. 填入你的 **POESESSID**（從瀏覽器 F12 → Application → Cookies → `pathofexile.tw` 取得）
+4. 聯盟會自動載入，切換到當前賽季聯盟即可使用
+
+---
+
+## 開發環境
 
 ### 需求
 
-- Node.js 18+
-- Yarn 1.x
-- Git 2.x
-- Python 3.x（編譯原生模組需要）
+- Node.js 18+、Yarn 1.x、Git 2.x、Python 3.x（編譯原生模組）
 
-### 首次設定
+### 啟動
 
 ```bash
-# 渲染進程
+# 終端 1：渲染進程
 cd renderer
-yarn install
-yarn make-index-files
+yarn install && yarn make-index-files && yarn dev
 
-# 主進程
-cd ../main
-yarn install
-```
-
-### 啟動開發模式
-
-開啟兩個終端：
-
-```bash
-# 終端 1：Vite 開發伺服器 (port 5173)
-cd renderer
-yarn dev
-
-# 終端 2：Electron 主進程
+# 終端 2：主進程（待 renderer 啟動後）
 cd main
-yarn dev
+yarn install && yarn dev
 ```
 
 ### 生產構建
@@ -78,46 +65,32 @@ cd renderer && yarn make-index-files && yarn build
 cd ../main && yarn build && yarn package
 ```
 
-## 使用方式（台服）
+---
 
-1. 在設定頁面將語言切換為「正體中文」
-2. Realm 選擇「Hotcool」
-3. 填入你的 POESESSID（從瀏覽器 Cookie 取得）
-4. 聯盟會自動載入台服聯盟列表，預設為「標準模式」
+## 技術棧
 
-## 專案架構
-
-```
-awakened-poe-trade/
-├── main/                    # Electron 主進程
-│   └── src/
-│       ├── main.ts          # 應用入口
-│       ├── server.ts        # HTTP + WebSocket 伺服器
-│       ├── proxy.ts         # HTTP 代理（含台服 POESESSID 注入）
-│       ├── windowing/       # 遊戲視窗偵測、覆蓋視窗
-│       ├── shortcuts/       # 全域快捷鍵
-│       └── vision/          # OCR 圖像辨識
-├── renderer/                # Vue 3 渲染進程
-│   └── src/
-│       ├── parser/          # 物品文字解析器（支援繁中）
-│       ├── web/
-│       │   ├── Config.ts    # 全域設定（含 poesessid）
-│       │   ├── background/  # 聯盟/價格資料載入
-│       │   ├── price-check/ # 價格查詢核心
-│       │   └── settings/    # 設定頁面
-│       └── assets/          # 靜態資源與遊戲資料
-├── ipc/                     # 主進程與渲染進程共享型別
-└── docs/                    # 文件
-```
-
-## 文件參考
-
-- [開發流程詳解](./DEVELOPMENT_GUIDE.md)
-- [構建指南](./DEVELOPING.md)
-- [台服重構任務說明](./TWServer.md)
-- [快速入門](./docs/quick-start.md)
-- [常見問題](./docs/faq.md)
+| 類別 | 技術 |
+|------|------|
+| 桌面框架 | Electron 40 |
+| 前端框架 | Vue 3 + Vite |
+| 樣式 | Tailwind CSS |
+| 語言 | TypeScript |
+| 套件管理 | Yarn 1.x |
 
 ---
 
-*本工具非 Grinding Gear Games 或 Hotcool 官方產品。*
+## 致謝
+
+本專案站在巨人的肩膀上，向以下開源作者與服務致上誠摯謝意：
+
+| 對象 | 貢獻 |
+|------|------|
+| [SnosMe](https://github.com/SnosMe/awakened-poe-trade) | 原始專案作者，提供完整的 Awakened PoE Trade 核心架構 |
+| [poe.ninja](https://poe.ninja) | 提供即時市場匯率與物品價格資料 |
+| [poeprices.info](https://www.poeprices.info) | 提供 AI 物品價格預測服務 |
+| [Grinding Gear Games](https://www.pathofexile.com) | 開發 Path of Exile 遊戲本體與提供開放的交易 API |
+| [Hotcool](https://pathofexile.tw) | 提供台灣/香港地區的 PoE 代理服務與 API 端點 |
+
+---
+
+*本工具為非官方社群作品，與 Grinding Gear Games 及 Hotcool 無從屬關係。*

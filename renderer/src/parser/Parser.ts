@@ -182,25 +182,36 @@ function normalizeName (item: ParserState) {
 function findInDatabase (item: ParserState) {
   let info: BaseType[] | undefined
   if (item.category === ItemCategory.DivinationCard) {
-    info = ITEM_BY_REF('DIVINATION_CARD', item.name)
+    info = ITEM_BY_REF('DIVINATION_CARD', item.name) ?? ITEM_BY_TRANSLATED('DIVINATION_CARD', item.name)
   } else if (item.category === ItemCategory.CapturedBeast) {
-    info = ITEM_BY_REF('CAPTURED_BEAST', item.baseType ?? item.name)
+    const n = item.baseType ?? item.name
+    info = ITEM_BY_REF('CAPTURED_BEAST', n) ?? ITEM_BY_TRANSLATED('CAPTURED_BEAST', n)
   } else if (item.category === ItemCategory.Gem) {
-    info = ITEM_BY_REF('GEM', item.name)
+    info = ITEM_BY_REF('GEM', item.name) ?? ITEM_BY_TRANSLATED('GEM', item.name)
   } else if (item.category === ItemCategory.MetamorphSample) {
-    info = ITEM_BY_REF('ITEM', item.name)
+    info = ITEM_BY_REF('ITEM', item.name) ?? ITEM_BY_TRANSLATED('ITEM', item.name)
   } else if (item.category === ItemCategory.Voidstone) {
     info = ITEM_BY_REF('ITEM', 'Charged Compass')
   } else if (item.rarity === ItemRarity.Unique && !item.isUnidentified) {
-    info = ITEM_BY_REF('UNIQUE', item.name)
+    info = ITEM_BY_REF('UNIQUE', item.name) ?? ITEM_BY_TRANSLATED('UNIQUE', item.name)
   } else {
-    info = ITEM_BY_REF('ITEM', item.baseType ?? item.name)
+    const n = item.baseType ?? item.name
+    info = ITEM_BY_REF('ITEM', n) ?? ITEM_BY_TRANSLATED('ITEM', n)
   }
   if (!info?.length) {
     return err('item.unknown')
   }
   if (info[0].unique) {
-    info = info.filter(info => info.unique!.base === item.baseType)
+    let filtered = info.filter(info => info.unique!.base === item.baseType)
+    if (!filtered.length && item.baseType) {
+      // For non-English, baseType from clipboard is translated — resolve English refName
+      const baseRefName = (ITEM_BY_TRANSLATED('ITEM', item.baseType) ?? ITEM_BY_REF('ITEM', item.baseType))?.[0]?.refName
+      if (baseRefName) {
+        filtered = info.filter(info => info.unique!.base === baseRefName)
+        if (filtered.length) item.baseType = baseRefName
+      }
+    }
+    if (filtered.length) info = filtered
   }
   item.infoVariants = info
   // choose 1st variant, correct one will be picked at the end of parsing
