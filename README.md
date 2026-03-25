@@ -46,7 +46,26 @@
 
 - Node.js 18+、Yarn 1.x、Git 2.x、Python 3.x（編譯原生模組）
 
-### 啟動
+### 一鍵啟動（推薦）
+
+```bash
+# 1. 首次安裝：檢查環境 + 安裝所有依賴 + 產生索引檔
+yarn setup
+
+# 2. 啟動開發環境（自動依序啟動 Renderer → Electron）
+yarn dev
+```
+
+> `yarn dev` 會先等待 Vite 就緒，再自動啟動 Electron，無需手動分兩個終端。
+
+附加選項：
+
+| 指令 | 說明 |
+|------|------|
+| `yarn dev:renderer` | 只啟動 Vite（純前端開發） |
+| `yarn dev:main` | 只啟動 Electron（後端除錯） |
+
+### 手動啟動（進階）
 
 ```bash
 # 終端 1：渲染進程
