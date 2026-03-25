@@ -11,7 +11,15 @@ const PROXY_HOSTS = [
   { host: 'www.poeprices.info', official: false },
 ]
 
+const TW_USER_AGENT = 'Awakened-PoE-Trade-Taiwan-Mod/1.0'
+
 export class HttpProxy {
+  private poesessid: string = ''
+
+  updatePoesessid (poesessid: string) {
+    this.poesessid = poesessid
+  }
+
   constructor (
     server: Server,
     logger: Logger
@@ -29,12 +37,23 @@ export class HttpProxy {
         }
       }
 
+      const isTwServer = (host === 'pathofexile.tw')
+
+      // 台服請求注入 POESESSID Cookie
+      if (isTwServer && this.poesessid) {
+        req.headers['cookie'] = `POESESSID=${this.poesessid}`
+      }
+
+      const userAgent = isTwServer
+        ? TW_USER_AGENT
+        : app.userAgentFallback
+
       const proxyReq = net.request({
         url: 'https://' + req.url.slice('/proxy/'.length),
         method: req.method,
         headers: {
           ...req.headers,
-          'user-agent': app.userAgentFallback
+          'user-agent': userAgent
         },
         useSessionCookies: true,
         referrerPolicy: 'no-referrer-when-downgrade'

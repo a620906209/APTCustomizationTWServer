@@ -1,0 +1,40 @@
+[2026-03-25 Session Log]
+
+== Task: README_REVAMP_PROJECT_AWAKENED_POE ==
+Source: brain.log Action Spec
+Status: COMPLETED
+
+Actions taken:
+1. [Step 1] Analyzed project structure - confirmed modules: price-check, map-check, stash-search, item-search, vision/OCR
+2. [Step 1] Verified tech stack: Electron + Vue 3 + Vite + TypeScript + Tailwind CSS
+3. [Step 1] Confirmed multi-language support: en, cmn-Hant, ko, ru
+4. [Step 4] Validated all relative links exist:
+   - DEVELOPING.md: OK
+   - DEVELOPMENT_GUIDE.md: OK
+   - TWServer.md: OK
+   - LICENSE: OK
+   - docs/quick-start.md: OK
+   - docs/chat-commands.md: OK
+   - docs/faq.md: OK
+5. [Step 3] Wrote new README.md with:
+   - License + Downloads badges
+   - Key Features section (Price Check, Map Check, Stash Search, Vision, Multi-Language, Overlay)
+   - Getting Started (Users + Developers)
+   - Technical Stack
+   - Documentation links
+   - Contributing section
+
+== Prior Task: TWServer.md Execution ==
+Status: COMPLETED (Phase 1-3)
+
+Phase 1 (Parser Localization): Already complete - cmn-Hant/client_strings.js has full TW translations
+Phase 2 (POESESSID Injection): Implemented
+  - Config.ts: added poesessid field
+  - ipc/types.ts: added poesessid to HostConfig
+  - proxy.ts: Cookie injection + TW_USER_AGENT for pathofexile.tw
+  - main.ts: passes poesessid to HttpProxy on config update
+  - general.vue: POESESSID input field (visible when realm=pc-garena)
+Phase 3 (League API Adaptation): Implemented
+  - Leagues.ts: TW uses /api/trade/data/leagues endpoint
+  - Default league set to 標準模式 for TW garena
+  - poe.ninja prices auto-disabled for pc-garena (existing logic)

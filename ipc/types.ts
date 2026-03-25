@@ -8,6 +8,7 @@ export interface HostConfig {
   logKeys: boolean
   windowTitle: string
   language: string
+  poesessid: string
 }
 
 export interface ShortcutAction {

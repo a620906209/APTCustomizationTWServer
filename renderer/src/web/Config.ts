@@ -117,6 +117,7 @@ export interface Config {
   language: 'en' | 'ru' | 'cmn-Hant' | 'ko'
   realm: 'pc-ggg' | 'pc-garena'
   useIntlSite: boolean
+  poesessid: string
   widgets: widget.Widget[]
   fontSize: number
   showAttachNotification: boolean
@@ -163,6 +164,7 @@ export const defaultConfig = (): Config => ({
   language: 'en',
   realm: 'pc-ggg',
   useIntlSite: false,
+  poesessid: '',
   fontSize: 16,
   widgets: widgetRegistry.widgets.reduce<widget.Widget[]>((widgets, { widget }) => {
     const res: widget.Widget[] = []
@@ -563,6 +565,7 @@ function getConfigForHost (): HostConfig {
     overlayKey: config.overlayKey,
     logKeys: config.logKeys,
     windowTitle: config.windowTitle,
-    language: config.language
+    language: config.language,
+    poesessid: config.poesessid
   }
 }

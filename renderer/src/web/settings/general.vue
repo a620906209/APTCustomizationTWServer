@@ -19,6 +19,11 @@
     <ui-checkbox class="mb-4" v-if="language !== 'en' && realm === 'pc-ggg'"
       v-model="useIntlSite" :disabled="forcedIntlSite"
       :class="{ 'text-gray-500': forcedIntlSite }">{{ t(':use_intl_site') }} <span class="bg-gray-200 text-gray-900 rounded px-1">www.pathofexile.com</span></ui-checkbox>
+    <div class="mb-4" v-if="language === 'cmn-Hant' && realm === 'pc-garena'">
+      <div class="flex-1 mb-1">POESESSID</div>
+      <input v-model.trim="poesessid" type="password"
+        class="rounded bg-gray-900 px-1 block w-full font-sans" placeholder="貼上你的 POESESSID">
+    </div>
     <div class="mb-4 mt-4">
       <div class="flex-1 mb-1">{{ t(':font_size') }}</div>
       <div class="flex gap-1">
@@ -101,7 +106,8 @@ export default defineComponent({
       forcedIntlSite: computed(() => props.config.realm === 'pc-ggg' && props.config.language === 'cmn-Hant'),
       restoreClipboard: configModelValue(() => props.config, 'restoreClipboard'),
       showAttachNotification: configModelValue(() => props.config, 'showAttachNotification'),
-      windowTitle: configModelValue(() => props.config, 'windowTitle')
+      windowTitle: configModelValue(() => props.config, 'windowTitle'),
+      poesessid: configModelValue(() => props.config, 'poesessid')
     }
   }
 })

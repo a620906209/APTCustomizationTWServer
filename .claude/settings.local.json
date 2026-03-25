@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn -v)",
+      "Bash(where yarn:*)",
+      "Bash(npm install:*)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(yarn install:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
