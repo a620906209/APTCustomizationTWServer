@@ -37,13 +37,6 @@ const checks = [
     installHint: '請至 https://nodejs.org 下載 v18+ 版本'
   },
   {
-    name: 'Yarn',
-    cmd: 'yarn -v',
-    required: true,
-    installCmd: 'npm install -g yarn',
-    installHint: '將自動執行: npm install -g yarn'
-  },
-  {
     name: 'Python',
     cmd: 'python --version',
     required: false,
@@ -121,7 +114,7 @@ for (const m of modules) {
     continue;
   }
   console.log(`→ 安裝 ${m.label}...`);
-  const r = spawnSync('yarn', ['install'], { cwd: abs, shell: true, stdio: 'inherit' });
+  const r = spawnSync('npm', ['install'], { cwd: abs, shell: true, stdio: 'inherit' });
   if (r.status !== 0) {
     console.log(red(`  安裝失敗 (exit ${r.status})`));
     process.exit(r.status);
@@ -134,7 +127,7 @@ const rendererDir = path.join(ROOT, 'renderer');
 const makeIndex   = path.join(rendererDir, 'src', 'assets', 'make-index-files.mjs');
 if (fs.existsSync(makeIndex)) {
   console.log(bold('\n=== 產生 renderer 索引檔 ===\n'));
-  const r = spawnSync('yarn', ['make-index-files'], { cwd: rendererDir, shell: true, stdio: 'inherit' });
+  const r = spawnSync('npm', ['run', 'make-index-files'], { cwd: rendererDir, shell: true, stdio: 'inherit' });
   if (r.status !== 0) {
     console.log(yellow('  make-index-files 失敗，可繼續但首次執行可能報錯'));
   } else {
@@ -142,4 +135,4 @@ if (fs.existsSync(makeIndex)) {
   }
 }
 
-console.log(bold(green('\n✨ 環境準備完成！執行 `yarn dev` 啟動開發環境。\n')));
+console.log(bold(green('\n✨ 環境準備完成！執行 `npm run dev` 啟動開發環境。\n')));

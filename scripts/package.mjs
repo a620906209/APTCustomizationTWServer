@@ -1,9 +1,9 @@
 import { spawn } from 'node:child_process'
 import process from 'node:process'
 
-const command = process.platform === 'win32' ? 'yarn.cmd' : 'yarn'
+const command = process.platform === 'win32' ? 'npm.cmd' : 'npm'
 
-const child = spawn(command, ['package'], {
+const child = spawn(command, ['run', 'package'], {
   cwd: new URL('../main', import.meta.url),
   stdio: 'inherit'
 })

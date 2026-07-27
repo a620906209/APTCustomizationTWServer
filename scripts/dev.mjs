@@ -41,7 +41,7 @@ process.on('SIGTERM', () => killAll(0));
 function startRenderer() {
   return new Promise((resolve, reject) => {
     console.log(bold('\n[1/2] 啟動 Renderer (Vite)...'));
-    rendererProc = spawn('yarn', ['dev'], {
+    rendererProc = spawn('npm', ['run', 'dev'], {
       cwd: path.join(ROOT, 'renderer'),
       shell: true,
       stdio: ['ignore', 'pipe', 'pipe']
@@ -72,7 +72,7 @@ function startRenderer() {
 // ─── 啟動 Main (Electron) ──────────────────────────────────
 function startMain() {
   console.log(bold('\n[2/2] 啟動 Main (Electron)...'));
-  mainProc = spawn('yarn', ['dev'], {
+  mainProc = spawn('npm', ['run', 'dev'], {
     cwd: path.join(ROOT, 'main'),
     shell: true,
     stdio: ['ignore', 'pipe', 'pipe']
