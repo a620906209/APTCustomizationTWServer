@@ -1,0 +1,45 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+context: |
+  Project: APTCustomizationTWServer — a Traditional Chinese (TW) localization
+  fork of awakened-poe-trade (SnosMe/awakened-poe-trade), retargeted from the
+  international game server (pathofexile.com) to the Taiwan server operated
+  by Hotcool (pathofexile.tw).
+
+  Monorepo layout (matches upstream): main/ (Electron main process),
+  renderer/ (Vue3 + Vite UI), ipc/ (shared IPC types), docs/, scripts/
+  (fork-only dev tooling: setup.mjs, dev.mjs, package.mjs).
+
+  Git setup: this repo was git-initialized locally (no prior history) with
+  baseline commit "Baseline: TW fork v3.28.103 (pre-sync)". A remote named
+  `upstream` points to a local reference checkout of awakened-poe-trade
+  v3.29.101 (also freshly git-initialized, no shared history — use two-dot
+  `git diff HEAD upstream/master` for comparisons, not three-way merge).
+
+  TW customization is concentrated in a known set of files (not scattered):
+    - Parser: renderer/src/parser/Parser.ts, magic-name.ts
+    - Network/config: renderer/src/web/Config.ts,
+      background/IPC.ts, background/Leagues.ts
+    - UI: item-check/WidgetItemCheck.vue,
+      price-check/filters/FilterModifier.vue,
+      price-check/filters/create-item-filters.ts, settings/general.vue
+    - Main process: main/src/main.ts, proxy.ts,
+      shortcuts/HostClipboard.ts, shortcuts/Shortcuts.ts
+    - Shared types: ipc/types.ts
+    - Locale data: renderer/public/data/cmn-Hant/app_i18n.json (TW UI
+      strings), items.ndjson / stats.ndjson (per-locale), patrons.json
+    - Docs: README.md (fully rewritten in Traditional Chinese), TWServer.md
+      (the authoritative TW customization spec — regex/dictionary rules,
+      pathofexile.tw domain swap, POESESSID cookie injection, custom
+      User-Agent, league/stats sync requirements)
+
+  When judging whether a diff against upstream is "intentional TW
+  customization" vs. "should just take upstream's version", TWServer.md is
+  the source of truth.
+
+# Per-artifact rules (optional)
+# rules:
+#   proposal:
+#     - Keep proposals under 500 words
