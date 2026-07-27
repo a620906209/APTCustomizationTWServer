@@ -50,18 +50,18 @@
 
 ## 8. Build tooling: main/ yarn → npm migration
 
-- [ ] 8.1 Adopt `main/package-lock.json`, delete `main/yarn.lock`, adopt upstream's `main/package.json` (`postinstall`/`patch-package`/`allowScripts` additions + dependency bumps), `main/tsconfig.json`, `main/electron-builder.yml` (verify TW branding/appId untouched)
-- [ ] 8.2 Update `scripts/setup.mjs` to bootstrap/install `main/` via `npm` instead of `yarn` (replace `yarn -v` check, `npm install -g yarn` fallback, `spawnSync('yarn', ['install'], ...)`)
-- [ ] 8.3 Update `scripts/dev.mjs` to spawn `npm run dev` instead of `yarn dev` for the `main/` process (verify `renderer/` side, already npm-based, is unaffected)
-- [ ] 8.4 Update `scripts/package.mjs` (`yarn.cmd`/`yarn` invocation) to use `npm`
-- [ ] 8.5 Inspect `main/build/script.mjs` for any yarn-specific assumptions and adjust if needed
-- [ ] 8.6 Clean-install verification: remove `main/node_modules`, run `npm run setup` from repo root, confirm it completes without yarn
-- [ ] 8.7 Commit as "Migrate main/ package management from yarn to npm (upstream v3.29.101)"
+- [x] 8.1 Adopted `main/package-lock.json`, deleted `main/yarn.lock`, adopted upstream's `main/package.json`, `main/tsconfig.json`, `main/electron-builder.yml` — confirmed no TW branding/appId present to protect
+- [x] 8.2 Updated `scripts/setup.mjs`: removed the `yarn -v`/`npm install -g yarn` check entirely (npm ships bundled with Node, no separate check needed), changed install loop to `spawnSync('npm', ['install'], ...)`
+- [x] 8.3 **Correction**: `renderer/` was NOT already npm-only as originally assumed — `scripts/dev.mjs` was spawning `yarn dev` for *both* `main/` and `renderer/`. Updated both to `spawn('npm', ['run', 'dev'], ...)`. Also deleted `renderer/yarn.lock` (stale; `renderer/package-lock.json` already existed and is upstream's authoritative one, confirmed via CI using `npm ci` for renderer too)
+- [x] 8.4 Updated `scripts/package.mjs` (`yarn.cmd`/`yarn` → `npm.cmd`/`npm`, `['package']` → `['run', 'package']`)
+- [x] 8.5 Inspected `main/build/script.mjs` — no yarn references found, no change needed
+- [x] 8.6 Clean-install verification: ran `npm run setup` from repo root (no pre-existing `node_modules`) — completed successfully for main (incl. new `postinstall` patch-package step), renderer, and docs, plus `make-index-files` generation. Reverted the locally-regenerated `main/package-lock.json` back to upstream's exact committed version afterward (keep the reproducible/authoritative lockfile, not a local npm-version-dependent regeneration). Left `docs/package-lock.json` untracked (upstream doesn't commit one either).
+- [x] 8.7 Commit as "Migrate main/ package management from yarn to npm (upstream v3.29.101)"
 
 ## 9. Version metadata
 
-- [ ] 9.1 Confirm `main/package.json` version reflects the new upstream base (`3.29.101`-derived) while `main/electron-builder.yml` product identity remains TW-branded
-- [ ] 9.2 Commit as "Bump version metadata to v3.29.101 base"
+- [x] 9.1 Confirmed `main/package.json` version is `3.29.101` (already adopted wholesale in §8). `main/electron-builder.yml` has no TW-specific branding/appId to preserve (`productName: "Awakened PoE Trade"` is generic, unchanged) — nothing to protect there.
+- [x] 9.2 No separate commit needed — version bump already included in the §8 commit (`main/package.json` was adopted wholesale as part of the yarn→npm migration)
 
 ## 10. Verification
 
