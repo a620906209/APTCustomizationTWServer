@@ -42,10 +42,11 @@
 
 ## 7. Locale data merge
 
-- [ ] 7.1 Diff `renderer/public/data/cmn-Hant/app_i18n.json` keys against upstream's `en/app_i18n.json`; add any new upstream keys with a Traditional Chinese translation (placeholder from `en` value + TODO marker if no translation available yet); do not overwrite existing `cmn-Hant` values
-- [ ] 7.2 Same additive-merge process for `renderer/public/data/cmn-Hant/items.ndjson` and `stats.ndjson`
-- [ ] 7.3 Adopt `renderer/public/data/{en,ko,ru}/items.ndjson`, `{en,ko,ru}/stats.ndjson`, and `patrons.json` wholesale from `upstream/master` (not TW-customized)
-- [ ] 7.4 Commit as "Merge locale data with upstream v3.29.101"
+- [ ] 7.1 Diff `renderer/public/data/cmn-Hant/app_i18n.json` keys against upstream's `en/app_i18n.json`; for every new key upstream introduced, write a real Traditional Chinese translation (translate from the `en` source text — no English left as a placeholder) and merge it in; do not overwrite existing `cmn-Hant` values
+- [ ] 7.2 Same additive-merge-with-translation process for `renderer/public/data/cmn-Hant/items.ndjson` and `stats.ndjson` (translate any new item/stat names and descriptions into Traditional Chinese)
+- [ ] 7.3 Adopt `renderer/public/data/{en,ko,ru}/items.ndjson`, `{en,ko,ru}/stats.ndjson`, and `patrons.json` wholesale from `upstream/master` (not TW-customized, left in their original language)
+- [ ] 7.4 Spot-check: confirm no untranslated English strings remain in `cmn-Hant/app_i18n.json`, `items.ndjson`, or `stats.ndjson` after the merge
+- [ ] 7.5 Commit as "Merge locale data with upstream v3.29.101 (incl. new-content translation)"
 
 ## 8. Build tooling: main/ yarn → npm migration
 
@@ -71,6 +72,7 @@
 - [ ] 10.5 Confirm POESESSID cookie header and custom User-Agent are present on authenticated requests
 - [ ] 10.6 Confirm league list/default (Standard) and stats sync populate correctly from the TW API on startup
 - [ ] 10.7 Confirm Traditional Chinese UI strings render correctly (spot-check settings screen)
+- [ ] 10.7a Confirm no untranslated English strings remain for newly-synced content (new items/mods/UI text introduced by v3.29.101) — cross-check against task 7.4
 - [ ] 10.8 Full `git diff` review of the final state against the pre-sync baseline commit to confirm no unintended regressions
 
 ## 11. Archive

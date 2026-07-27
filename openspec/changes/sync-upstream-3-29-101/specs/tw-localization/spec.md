@@ -84,3 +84,14 @@ User-facing log output and UI text SHALL be presented in Traditional Chinese whe
 #### Scenario: Settings screen text
 - **WHEN** a user opens a settings panel with an existing `cmn-Hant` translation entry
 - **THEN** the panel renders the Traditional Chinese text rather than falling back to English.
+
+### Requirement: New Upstream Content Is Translated, Not Left in English
+When an upstream sync introduces new UI strings, item names/descriptions, or modifier ("stats") text that did not previously exist in the fork's `cmn-Hant` locale data, the sync SHALL include a Traditional Chinese translation of that new content before the sync is considered complete. Untranslated English placeholders SHALL NOT remain in `cmn-Hant` data files after a sync.
+
+#### Scenario: Upstream adds a new UI string
+- **WHEN** an upstream sync adds a new key to `en/app_i18n.json` that has no corresponding entry in `cmn-Hant/app_i18n.json`
+- **THEN** the sync adds a Traditional Chinese translation for that key to `cmn-Hant/app_i18n.json`, not the raw English text.
+
+#### Scenario: Upstream adds a new item or modifier
+- **WHEN** an upstream sync adds new entries to `en/items.ndjson` or `en/stats.ndjson` with no `cmn-Hant` counterpart
+- **THEN** the sync adds Traditional Chinese translations for those entries to `cmn-Hant/items.ndjson` / `stats.ndjson`.
