@@ -109,55 +109,55 @@
 
 | 工具 | 版本 | 下載 |
 |------|------|------|
-| Node.js | 18+ | [nodejs.org](https://nodejs.org/)（選 LTS 版） |
-| Yarn | 1.x | 安裝 Node.js 後執行 `npm install -g yarn` |
+| Node.js | 18+ | [nodejs.org](https://nodejs.org/)（選 LTS 版，npm 隨附安裝） |
 | Git | 2.x | [git-scm.com](https://git-scm.com/) |
 | Python | 3.x | [python.org](https://www.python.org/)（編譯原生模組用） |
 
 > **完全沒有 Node.js？** 先至 [nodejs.org](https://nodejs.org/) 下載並安裝 LTS 版本，安裝完畢後開啟終端（Windows: Win+R → `cmd`）執行：
 > ```bash
 > node -v   # 應顯示 v18.x.x 或以上
-> npm install -g yarn
-> yarn -v   # 應顯示 1.x.x
+> npm -v    # 應顯示 9.x.x 或以上（隨 Node.js 附帶，不需額外安裝）
 > ```
 
 ### 一鍵啟動（推薦）
 
 ```bash
 # 1. 首次安裝：檢查環境 + 安裝所有依賴 + 產生索引檔
-yarn setup
+npm run setup
 
 # 2. 啟動開發環境（自動依序啟動 Renderer → Electron）
-yarn dev
+npm run dev
 ```
 
-> `yarn dev` 會先等待 Vite 就緒，再自動啟動 Electron，無需手動分兩個終端。
+> `npm run dev` 會先等待 Vite 就緒，再自動啟動 Electron，無需手動分兩個終端。
 
 附加選項：
 
 | 指令 | 說明 |
 |------|------|
-| `yarn dev:renderer` | 只啟動 Vite（純前端開發） |
-| `yarn dev:main` | 只啟動 Electron（後端除錯） |
+| `npm run dev:renderer` | 只啟動 Vite（純前端開發） |
+| `npm run dev:main` | 只啟動 Electron（後端除錯） |
 
 ### 手動啟動（進階）
 
 ```bash
 # 終端 1：渲染進程
 cd renderer
-yarn install && yarn make-index-files && yarn dev
+npm install && npm run make-index-files && npm run dev
 
 # 終端 2：主進程（待 renderer 啟動後）
 cd main
-yarn install && yarn dev
+npm install && npm run dev
 ```
 
 ### 生產構建
 
 ```bash
-cd renderer && yarn make-index-files && yarn build
-cd ../main && yarn build && yarn package
+cd renderer && npm run make-index-files && npm run build
+cd ../main && npm run build && npm run package
 ```
+
+> 也可以在根目錄執行 `npm run package`，它會直接呼叫 `main/` 的 `electron-builder` 打包步驟（但 renderer 仍需先手動 build 過一次）。
 
 ---
 
@@ -169,7 +169,7 @@ cd ../main && yarn build && yarn package
 | 前端框架 | Vue 3 + Vite |
 | 樣式 | Tailwind CSS |
 | 語言 | TypeScript |
-| 套件管理 | Yarn 1.x |
+| 套件管理 | npm |
 
 ---
 
