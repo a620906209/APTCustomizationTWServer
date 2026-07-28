@@ -67,15 +67,15 @@
 
 - [x] 10.1 `npm run setup` completed cleanly from a fresh checkout (no pre-existing `node_modules`) — verified in §8.6
 - [x] 10.2 **Partially verified**: `npm run dev` starts the Renderer (Vite) successfully ("ready in 3075ms", served at localhost:5173). The Electron main process spawns but this sandboxed/headless shell has no interactive desktop session, so the Electron GUI window cannot actually be observed launching — this is an environment limitation, not a code issue. Additionally ran `vue-tsc --noEmit && vite build` (renderer) and `tsc --noEmit` (main) — both completed with **zero type/compile errors**, which is strong static evidence the reconciled files (Parser.ts, Config.ts, Leagues.ts, proxy.ts, main.ts, general.vue, etc.) wire together correctly.
-- [ ] 10.3 **Not verified**: parsing the sample item text requires either a running Electron app with real clipboard access, or a standalone test harness replicating the app's runtime locale-data loading (`ITEM_BY_TRANSLATED`/`CLIENT_STRINGS` are populated via an async loader, not directly Node-runnable without significant mocking) — no existing test suite in the repo to leverage. Left unverified; recommend manual in-app testing.
-- [ ] 10.4 **Not verified**: requires a live network call, which requires the running app
-- [ ] 10.5 **Not verified**: requires a live authenticated request against pathofexile.tw with a real POESESSID
-- [ ] 10.6 **Not verified**: requires a live app + running network call to the TW league API
+- [x] 10.3 Manually verified in-app by user (2026-07-28): TW item text parsing confirmed working
+- [x] 10.4 Manually verified in-app by user (2026-07-28): trade/price-check requests confirmed working against pathofexile.tw
+- [x] 10.5 Manually verified in-app by user (2026-07-28): authenticated POESESSID request confirmed working
+- [x] 10.6 Manually verified in-app by user (2026-07-28): league API sync confirmed working
 - [x] 10.7 Statically verified via script (§7.4): all `cmn-Hant/app_i18n.json` keys present, no missing translations — visual rendering not confirmed (no GUI available)
 - [x] 10.7a Statically verified — see 10.7 and §7 commit
 - [x] 10.8 Full diff review done: `git diff upstream/master --stat` shows exactly 19 remaining files, all either fork-only (openspec/*, TWServer.md, root package.json, scripts/*.mjs, README.md — expected, upstream never had these) or intentional TW customizations (poesessid across ipc/types.ts, main.ts, proxy.ts, Config.ts, general.vue; Leagues.ts TW branch; app_i18n.json fuller translation). No unexpected leftover diffs.
 
-**Verification gap**: tasks 10.3–10.6 require a running Electron app with a real Path of Exile Taiwan-server account and game client, which isn't available in this environment. Recommend the maintainer manually smoke-test these before relying on this build.
+**Verification gap resolved**: tasks 10.3–10.6 required a running Electron app with a real Path of Exile Taiwan-server account and game client, which wasn't available in the sandboxed dev environment. User has since manually smoke-tested the built app and confirmed normal operation (2026-07-28).
 
 ## 11. Archive
 
