@@ -78,7 +78,8 @@ export type IpcEvent =
   IpcItemText |
   IpcOcrText |
   IpcConfigChanged |
-  IpcUserAction
+  IpcUserAction |
+  IpcPoesessidLoginResult
 
 export type IpcEventPayload<Name extends IpcEvent['name'], T extends IpcEvent = IpcEvent> =
   T extends { name: Name, payload: infer P } ? P : never
@@ -175,6 +176,16 @@ type IpcUserAction =
   } | {
     action: 'stash-search'
     text: string
+  } | {
+    action: 'poesessid-login'
+  }>
+
+type IpcPoesessidLoginResult =
+  Event<'MAIN->CLIENT::poesessid-login-result', {
+    status: 'success'
+    value: string
+  } | {
+    status: 'cancelled' | 'timeout' | 'error'
   }>
 
 interface Event<TName extends string, TPayload = undefined> {

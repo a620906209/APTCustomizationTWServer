@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SnosMe/awakened-poe-trade.git"
+    "url": "https://github.com/a620906209/APTCustomizationTWServer.git"
   },
   "main": "dist/main.js",
   "dependencies": {

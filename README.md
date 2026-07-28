@@ -44,15 +44,17 @@
 
 1. 在程式內開啟設定（預設 `Ctrl + Space` → 齒輪圖示）
 2. 語言選「**正體中文**」、伺服器選「**Hotcool**」
-3. 填入你的 **POESESSID**
+3. 取得 **POESESSID**（點「登入」按鈕，或參考下方手動方式）
 4. 聯盟會自動載入，切換到當前賽季聯盟即可使用
 
 取得 POESESSID（台服）：
 
-1. 用瀏覽器登入 `pathofexile.tw`
-2. 按 `F12` 開啟開發者工具
-3. Application（應用程式）→ Cookies → `pathofexile.tw`
-4. 找到 `POESESSID` 並複製其值
+- **登入按鈕（建議）**：點 POESESSID 欄位旁的「登入」按鈕，在跳出的視窗內登入 `pathofexile.tw`，登入成功後會自動關閉視窗並填入 POESESSID
+- **手動輸入（備用）**：
+  1. 用瀏覽器登入 `pathofexile.tw`
+  2. 按 `F12` 開啟開發者工具
+  3. Application（應用程式）→ Cookies → `pathofexile.tw`
+  4. 找到 `POESESSID` 並複製其值，貼到設定頁的欄位中
 
 ### 常見問題
 
@@ -87,7 +89,7 @@
 
 - **繁體中文物品解析** — 解析器完整支援台服 `Ctrl+C` 複製的繁中物品文字
 - **API 全面導向台服** — 所有交易請求導向 `pathofexile.tw`，使用台服聯盟端點
-- **POESESSID 注入** — 設定頁面可輸入 POESESSID，自動注入至台服請求 Cookie
+- **POESESSID 注入** — 設定頁面可一鍵登入自動取得，或手動輸入 POESESSID，自動注入至台服請求 Cookie
 - **自訂 User-Agent** — 台服請求使用 `Awakened-PoE-Trade-Taiwan-Mod/1.0`
 - **繁中 UI 全翻譯** — 介面、設定、詞綴標籤等 306 個翻譯鍵全數本地化
 - **台服聯盟自動偵測** — 啟動時自動載入台服聯盟列表，預設「標準模式」
@@ -98,7 +100,7 @@
 
 1. 開啟設定（`Ctrl + Space` → 齒輪圖示）
 2. 語言選「**正體中文**」、伺服器選「**Hotcool**」
-3. 填入你的 **POESESSID**（從瀏覽器 F12 → Application → Cookies → `pathofexile.tw` 取得）
+3. 取得 **POESESSID**（點欄位旁的「登入」按鈕自動取得，或從瀏覽器 F12 → Application → Cookies → `pathofexile.tw` 手動取得）
 4. 聯盟會自動載入，切換到當前賽季聯盟即可使用
 
 ---

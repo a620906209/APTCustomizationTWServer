@@ -14,6 +14,7 @@ import { AppTray } from './AppTray'
 import { OverlayVisibility } from './windowing/OverlayVisibility'
 import { GameLogWatcher } from './host-files/GameLogWatcher'
 import { HttpProxy } from './proxy'
+import { PoesessidLogin } from './PoesessidLogin'
 
 if (!app.requestSingleInstanceLock()) {
   app.exit()
@@ -34,6 +35,7 @@ app.on('ready', async () => {
   const poeWindow = new GameWindow()
   const appUpdater = new AppUpdater(eventPipe)
   const httpProxy = new HttpProxy(server, logger)
+  new PoesessidLogin(eventPipe)
 
   setTimeout(
     async () => {

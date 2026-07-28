@@ -21,8 +21,18 @@
       :class="{ 'text-gray-500': forcedIntlSite }">{{ t(':use_intl_site') }} <span class="bg-gray-200 text-gray-900 rounded px-1">www.pathofexile.com</span></ui-checkbox>
     <div class="mb-4" v-if="language === 'cmn-Hant' && realm === 'pc-garena'">
       <div class="flex-1 mb-1">POESESSID</div>
-      <input v-model.trim="poesessid" type="password"
-        class="rounded bg-gray-900 px-1 block w-full font-sans" placeholder="貼上你的 POESESSID">
+      <div class="flex gap-1">
+        <input v-model.trim="poesessid" type="password"
+          class="rounded bg-gray-900 px-1 block w-full font-sans" placeholder="貼上你的 POESESSID">
+        <button type="button" class="rounded bg-gray-700 px-2 whitespace-nowrap"
+          :disabled="poesessidLoginStatus === 'pending'"
+          @click="startPoesessidLogin">登入</button>
+      </div>
+      <div class="text-gray-500 mt-1" v-if="poesessidLoginStatus === 'pending'">請在彈出視窗中登入 pathofexile.tw…</div>
+      <div class="text-red-500 mt-1" v-else-if="poesessidLoginStatus === 'cancelled'">登入已取消</div>
+      <div class="text-red-500 mt-1" v-else-if="poesessidLoginStatus === 'timeout'">登入逾時，請重試</div>
+      <div class="text-red-500 mt-1" v-else-if="poesessidLoginStatus === 'error'">登入視窗發生錯誤，請重試</div>
+      <div class="text-green-500 mt-1" v-else-if="poesessidLoginStatus === 'success'">已自動取得 POESESSID</div>
     </div>
     <div class="mb-4 mt-4">
       <div class="flex-1 mb-1">{{ t(':font_size') }}</div>
@@ -63,12 +73,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, onUnmounted } from 'vue'
 import { useI18nNs } from '@/web/i18n'
 import UiRadio from '@/web/ui/UiRadio.vue'
 import UiCheckbox from '@/web/ui/UiCheckbox.vue'
 import { configModelValue, configProp } from './utils'
 import { AppConfig } from '@/web/Config'
+import { Host } from '@/web/background/IPC'
 
 export default defineComponent({
   name: 'settings.general',
@@ -77,7 +88,27 @@ export default defineComponent({
   setup (props) {
     const { t } = useI18nNs('settings')
 
+    const poesessidLoginStatus = ref<'idle' | 'pending' | 'success' | 'cancelled' | 'timeout' | 'error'>('idle')
+    function startPoesessidLogin () {
+      poesessidLoginStatus.value = 'pending'
+      Host.sendEvent({
+        name: 'CLIENT->MAIN::user-action',
+        payload: { action: 'poesessid-login' }
+      })
+    }
+    const poesessidLoginController = Host.onEvent('MAIN->CLIENT::poesessid-login-result', (result) => {
+      poesessidLoginStatus.value = result.status
+      if (result.status === 'success') {
+        props.config.poesessid = result.value
+      }
+    })
+    onUnmounted(() => {
+      poesessidLoginController.abort()
+    })
+
     return {
+      poesessidLoginStatus,
+      startPoesessidLogin,
       t,
       fontSize: configModelValue(() => props.config, 'fontSize'),
       overlayBackgroundClose: configModelValue(() => props.config, 'overlayBackgroundClose'),
