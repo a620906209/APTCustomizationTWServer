@@ -34,7 +34,7 @@
 ## 6. Verification（驗證）
 
 - [x] 6.1–6.4 not run by the implementing agent — no real `pathofexile.tw` account/credentials available in this environment. `main`'s `tsc --noEmit` and `renderer`'s `vue-tsc --noEmit` both pass with no errors. **User should manually verify** the four scenarios below before relying on this feature（以下請使用者實機測試，登入視窗仍需自行輸入帳號密碼）：
-  - [ ] 6.1 點擊登入，在跳出的視窗中完成登入，確認 POESESSID 有自動填入，且交易查價功能可正常運作
-  - [ ] 6.2 不登入直接關閉登入視窗，確認狀態顯示為「已取消」，且原本的設定值沒有被覆蓋
-  - [ ] 6.3 手動貼上 POESESSID 仍然可以正常運作，且會覆蓋掉先前自動取得的值
-  - [ ] 6.4 連續點擊兩次登入按鈕，確認會聚焦到原本已開啟的視窗，而不是開出第二個視窗
+  - [x] 6.1 點擊登入，在跳出的視窗中完成登入，確認 POESESSID 有自動填入，且交易查價功能可正常運作 — 使用者確認測試 OK
+  - [x] 6.2 不登入直接關閉登入視窗，確認狀態顯示為「已取消」，且原本的設定值沒有被覆蓋 — 使用者確認測試 OK
+  - [x] 6.3 手動貼上 POESESSID 仍然可以正常運作，且會覆蓋掉先前自動取得的值 — 使用者確認測試 OK
+  - [x] 6.4 連續點擊兩次登入按鈕，確認會聚焦到原本已開啟的視窗，而不是開出第二個視窗 — 使用者確認測試 OK
