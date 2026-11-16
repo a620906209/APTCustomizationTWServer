@@ -3,6 +3,17 @@
 當 [SnosMe/awakened-poe-trade](https://github.com/SnosMe/awakened-poe-trade) 發佈新版時，依本文件把新版合併進台服版。
 上次同步：**v3.29.108**。
 
+## 簡易版（日常只要這四步）
+
+1. **下載新版**：下載原作者最新版原始碼，解壓覆蓋到 `awakened-poe-trade-master` 資料夾（與本專案同層）。
+2. **請 Claude 同步**：對 Claude 說「同步原作者新版」。Claude 會依下方「詳細步驟」更新 `upstream` 分支、合併、補繁中翻譯、檢查建置並做型別檢查。
+3. **自己測試**：執行 `npm run dev` 開 app，確認範例物品（`TWServer.md`）能解析、聯盟列表能載入、POESESSID 登入正常、新介面文字有繁中。
+4. **發佈**：測試沒問題後，請 Claude 打包並建立 GitHub Release（push 與發佈前 Claude 會先向你確認）。
+
+> 以下是給 Claude（或需要手動處理衝突時）查閱的詳細步驟，平常不需要自己照著敲。
+
+---
+
 ## 觀念
 
 - `upstream` 分支：只放原作者的**純淨版本**（每個版本一個 commit），不放台服修改。僅存在於本機/你自己的 repo，不會影響原作者。
