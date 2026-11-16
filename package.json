@@ -8,6 +8,7 @@
     "dev": "node scripts/dev.mjs",
     "dev:renderer": "node scripts/dev.mjs --renderer-only",
     "dev:main": "node scripts/dev.mjs --main-only",
-    "package": "node scripts/package.mjs"
+    "package": "node scripts/package.mjs",
+    "i18n:check": "node scripts/i18n-check.mjs"
   }
 }

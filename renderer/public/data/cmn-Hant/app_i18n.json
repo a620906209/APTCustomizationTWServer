@@ -136,7 +136,14 @@
     "not_mirrored": "非鏡像",
     "split": "分裂",
     "not_split": "非分裂",
-    "map_foil_reward": "貼模 {0}"
+    "map_foil_reward": "貼模 {0}",
+    "not_group": "皆不含",
+    "count_one_group": "任一",
+    "disenchanting": "分解",
+    "mercenary_6link": "6 連結，帶有 {0} 個三階輔助技能寶石",
+    "heist_wings_total": "側廂總數: {0}",
+    "complexity_hint": "對此物品詢價很可能需要啟用內建瀏覽器並登入你的帳號。",
+    "chart_sulphur": "亡者硫酸: {0}%"
   },
   "item_category": {
     "prop": "種類: {0}",
@@ -180,7 +187,8 @@
     "tincture": "廷劑",
     "azmeri_charm": "護符",
     "idol": "神像",
-    "graft": "嫁接"
+    "graft": "嫁接",
+    "chart": "海圖"
   },
   "filters": {
     "selected_some": "{1} 個詞綴中已選 {0} 個",
@@ -222,7 +230,22 @@
     "tag_explicit_warlord": "總督軍",
     "tag_explicit_delve": "挖掘",
     "tag_explicit_veiled": "隱匿",
-    "tag_explicit_incursion": "神廟入侵"
+    "tag_explicit_incursion": "神廟入侵",
+    "tier_gilded": "傳奇",
+    "preset_bulk": "批量",
+    "option_merc_required": "必要",
+    "option_merc_optional": "N-1",
+    "option_empty_affix": "任意",
+    "option_empty_prefix": "前綴",
+    "option_empty_suffix": "後綴",
+    "tag_vestigial": "殘留",
+    "tag_explicit_infamous": "傭兵",
+    "tag_explicit_essence": "精髓",
+    "tag_brick": "廢品",
+    "tag_mercenary_primary": "主要",
+    "tag_mercenary_secondary": "次要",
+    "tag_mercenary_utility": "實用",
+    "tag_filter_group": "詞綴群組"
   },
   "online_filter": {
     "offline_toggle": "離線 & 在線",
@@ -301,7 +324,8 @@
     "profile": "設定檔",
     "search_selected": "僅已選取",
     "search_stat_col": "詞綴 (找到: {0})",
-    "new_mods_icon": "為新詞綴顯示圖示"
+    "new_mods_icon": "為新詞綴顯示圖示",
+    "maven_reminder": "包含「賢者的邀請函」\n所需的首領"
   },
   "trade_result": {
     "error": "交易網站請求失敗",
@@ -361,7 +385,7 @@
     "hotkey": "自動隱藏模式",
     "hotkey_locked": "開啟不自動隱藏",
     "enable_browser": "啟用內建瀏覽器",
-    "builtin_browser_warning": "我了解未來版本可能含有可竊取 POESESSID 的惡意程式碼。",
+    "builtin_browser_warning": "登入你的 PoE 帳號可能會略為降低每分鐘可發出的請求數，但能在詢價時使用更複雜的查詢條件。",
     "highlight_hint": "即使關閉此設定，你的物品仍會被高亮顯示",
     "show_seller": "顯示賣家",
     "fill_rolls": "填入詞綴數值",
@@ -373,6 +397,7 @@
     "auto_search": "按下時自動搜尋",
     "select_stock": "永遠選取「庫存」篩選",
     "show_prediction": "顯示價格預測",
-    "remember_currency": "記住買斷通貨篩選"
+    "remember_currency": "記住買斷通貨篩選",
+    "default_settings": "預設使用以下設定搜尋:"
   }
 }
