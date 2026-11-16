@@ -132,15 +132,14 @@ git checkout master
 git merge --ff-only sync-upstream-X-Y-Z
 ```
 
-### 8. 打包
+### 8. 打包（先試打包，不發佈）
 
 ```shell
-cd renderer && npm ci && npm run build
-cd ../main && npm ci && npm run build
-npm run package -- --win -p never      # -p never：只在本機打包，不發佈
+git push origin master
+npm run release -- --dry-run
 ```
 
-產物在 `main/dist/`：
+腳本會檢查工作目錄乾淨且與 `origin/master` 一致，建置 renderer 與 main 後打包 Windows 版，**不會發佈**。產物在 `main/dist/`：
 
 - `Awakened PoE Trade Setup X.Y.Z.exe`（安裝版）
 - `Awakened PoE Trade X.Y.Z.exe`（免安裝版）
@@ -150,19 +149,17 @@ npm run package -- --win -p never      # -p never：只在本機打包，不發�
 ### 9. 發佈 Release
 
 ```shell
-git push origin master
-
-cd main/dist
-gh release create VX.Y.Z -R a620906209/APTCustomizationTWServer --target master \
-  --title "VX.Y.Z - 說明" --notes "更新內容..." \
-  "Awakened PoE Trade Setup X.Y.Z.exe" "Awakened PoE Trade X.Y.Z.exe"
+npm run release -- --title "說明" --notes-file notes.md
 ```
+
+（或用 `--notes "更新內容"`。）腳本會在發佈前顯示將上傳的檔案並要求輸入 `y` 確認，然後用 `gh` 建立 release。需要先 `gh auth login`。
 
 注意：
 
-- Tag 命名沿用既有格式：大寫 `V` 開頭（例如 `V3.29.108`）。
+- Tag 由 `main/package.json` 的版本自動產生，格式為大寫 `V` 開頭（例如 `V3.29.108`）；該版本的 release 已存在時腳本會拒絕發佈。
 - 不上傳 `latest.yml` 與 `.blockmap`：`latest.yml` 內的檔名用連字號，GitHub 上傳後檔名會變成點號，自動更新會對不上。
 - `main/dist/` 已在 `.gitignore`，打包完可以清掉舊版安裝檔。
+- GitHub Actions 的 `Build` 已改成僅手動觸發；原作者的文件網站（`docs/`）與 Pages 部署已移除，同步時不需要處理。
 
 ## 常見狀況
 

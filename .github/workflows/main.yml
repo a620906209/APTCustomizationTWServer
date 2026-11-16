@@ -1,14 +1,8 @@
 name: Build
 
+# 台服版以本機打包並手動發佈（見 SYNC_UPSTREAM.md），此 CI 僅供手動觸發
 on:
-  push:
-    branches:
-      - 'master'
-    tags-ignore:
-      - '**'
-    paths-ignore:
-      - 'docs/**'
-      - README.md
+  workflow_dispatch:
 
 jobs:
   renderer:

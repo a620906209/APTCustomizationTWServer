@@ -93,7 +93,6 @@ if (!allRequired) {
 const modules = [
   { dir: 'main',     label: 'Main  (Electron)' },
   { dir: 'renderer', label: 'Renderer (Vue+Vite)' },
-  { dir: 'docs',     label: 'Docs  (VitePress)',  optional: true },
 ];
 
 console.log(bold('\n=== 安裝子模組依賴 ===\n'));
