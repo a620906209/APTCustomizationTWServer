@@ -1,0 +1,5 @@
+- [x] Adopt non-customized upstream files
+- [x] 3-way merge Leagues.ts, proxy.ts, Config.ts, main/package.json
+- [x] Fix scripts/setup.mjs for removed make-index-files script
+- [x] Typecheck renderer and main
+- [ ] Manual in-app verification (sample item, POESESSID, league sync)

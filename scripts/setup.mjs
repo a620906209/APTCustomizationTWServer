@@ -122,17 +122,6 @@ for (const m of modules) {
   console.log(green(`  完成`));
 }
 
-// ─── 3. 產生 renderer 索引檔 ──────────────────────────────
-const rendererDir = path.join(ROOT, 'renderer');
-const makeIndex   = path.join(rendererDir, 'src', 'assets', 'make-index-files.mjs');
-if (fs.existsSync(makeIndex)) {
-  console.log(bold('\n=== 產生 renderer 索引檔 ===\n'));
-  const r = spawnSync('npm', ['run', 'make-index-files'], { cwd: rendererDir, shell: true, stdio: 'inherit' });
-  if (r.status !== 0) {
-    console.log(yellow('  make-index-files 失敗，可繼續但首次執行可能報錯'));
-  } else {
-    console.log(green('  索引檔產生完成'));
-  }
-}
+// 註：renderer 索引檔改由 vite plugin (vite-plugin-make-indexes) 於 dev/build 時自動產生
 
 console.log(bold(green('\n✨ 環境準備完成！執行 `npm run dev` 啟動開發環境。\n')));
