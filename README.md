@@ -5,6 +5,9 @@
 [![Server](https://img.shields.io/badge/server-pathofexile.tw-green)](https://pathofexile.tw)
 
 > 基於 [SnosMe/awakened-poe-trade](https://github.com/SnosMe/awakened-poe-trade) 的分支，**專為流亡黯道台灣伺服器 (pathofexile.tw / Hotcool)** 深度在地化。
+>
+> 目前對應原作者版本：**v3.29.108**。下載請至 [Releases](https://github.com/a620906209/APTCustomizationTWServer/releases)。
+> 維護者請參考 [SYNC_UPSTREAM.md](./SYNC_UPSTREAM.md)（同步原作者新版的流程）與 [TWServer.md](./TWServer.md)（台服客製化說明）。
 
 ---
 
@@ -70,7 +73,7 @@
 
 - 你的 Windows 版本（Windows 10/11）
 - 你使用的是安裝版還是免安裝版
-- `main/dist` 內檔名版本（例如 `3.28.103`）
+- 檔名上的版本號（例如 `3.29.108`）
 - 問題發生步驟與截圖（如果可以）
 
 ## 功能總覽
@@ -91,7 +94,7 @@
 - **API 全面導向台服** — 所有交易請求導向 `pathofexile.tw`，使用台服聯盟端點
 - **POESESSID 注入** — 設定頁面可一鍵登入自動取得，或手動輸入 POESESSID，自動注入至台服請求 Cookie
 - **自訂 User-Agent** — 台服請求使用 `Awakened-PoE-Trade-Taiwan-Mod/1.0`
-- **繁中 UI 全翻譯** — 介面、設定、詞綴標籤等 306 個翻譯鍵全數本地化
+- **繁中 UI 全翻譯** — 介面、設定、詞綴標籤等 363 個翻譯鍵全數本地化
 - **台服聯盟自動偵測** — 啟動時自動載入台服聯盟列表，預設「標準模式」
 
 ---
