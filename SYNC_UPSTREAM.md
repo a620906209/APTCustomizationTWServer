@@ -14,6 +14,12 @@
 | 修改 upstream 檔案 | `ipc/types.ts`、`main/src/main.ts`、`main/src/proxy.ts`、`main/package.json`、`renderer/src/web/Config.ts`、`renderer/src/web/background/Leagues.ts`、`renderer/src/web/settings/general.vue`、`renderer/public/data/cmn-Hant/app_i18n.json` |
 | 台服新增檔案 | `main/src/PoesessidLogin.ts`、`scripts/`、根目錄 `package.json`、`TWServer.md`、本文件、`openspec/` |
 
+上表是 v3.29.108 當時的狀態，客製化檔案增減後可能過期。要確認目前的實際清單，用這個指令（`upstream` 分支就是原作者純淨版本，差異即台服客製化）：
+
+```shell
+git diff upstream --stat -- . ':!openspec' ':!.claude' ':!*lock*'
+```
+
 衝突時的原則：**保留 upstream 的新結構，把台服邏輯重新套上去**。台服行為的驗收基準見 `TWServer.md` 與 `openspec/specs/tw-localization/spec.md`。
 
 ## 步驟
