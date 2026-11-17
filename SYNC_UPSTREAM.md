@@ -6,6 +6,8 @@
 ## 簡易版（日常只要這四步）
 
 1. **下載新版**：下載原作者最新版原始碼，解壓覆蓋到 `awakened-poe-trade-master` 資料夾（與本專案同層）。
+   - 這個資料夾只是暫放區，不需要 `.git`；若裡面有舊的 `.git` 可直接刪除。
+   - 原作者有時在**版本號不變**時就推了小更新（例如 CI 設定、解析邏輯），所以版本號相同也要比對：把 `git archive upstream` 解到暫存資料夾，與新版做 `diff -rq --strip-trailing-cr`，有差異就照常同步。
 2. **請 Claude 同步**：對 Claude 說「同步原作者新版」。Claude 會依下方「詳細步驟」更新 `upstream` 分支、合併、補繁中翻譯、檢查建置並做型別檢查。
 3. **自己測試**：執行 `npm run dev` 開 app，確認範例物品（`TWServer.md`）能解析、聯盟列表能載入、POESESSID 登入正常、新介面文字有繁中。
 4. **發佈**：測試沒問題後，請 Claude 打包並建立 GitHub Release（push 與發佈前 Claude 會先向你確認）。
@@ -168,4 +170,5 @@ npm run release -- --title "說明" --notes-file notes.md
 | merge 後幾乎每個檔案都顯示被修改 | 換行不一致。確認步驟 2 有用 `core.autocrlf=input`；`git config core.autocrlf` 在 Windows 應為 `true` |
 | merge 出現大量 add/add 衝突 | `upstream` 分支與 `master` 沒接上歷史。確認 `git merge-base master upstream` 有輸出 |
 | `npm run dev` 啟動失敗 | 先 `npm run setup` 重新安裝依賴，再看 upstream 是否改了建置腳本（步驟 5） |
+| 新版版本號沒變，不確定要不要同步 | 用簡易版步驟 1 的 diff 比對；沒有差異才代表已是最新 |
 | 新版 upstream 改了台服客製化的檔案結構 | 以 upstream 新結構為主，重新套用台服邏輯；行為以 `TWServer.md` 為準 |
